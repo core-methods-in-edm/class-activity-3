@@ -1,6 +1,6 @@
 ---
 title: "class activity 3"
-author: "Charles Lang"
+author: "Chengxuan Hu"
 date: "10/2/2018"
 output: html_document
 ---
