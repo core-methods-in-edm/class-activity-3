@@ -1,13 +1,13 @@
 ---
 title: "class activity 3"
-author: "Charles Lang"
+author: "Ziyuan Guo"
 date: "10/2/2018"
 output: html_document
 ---
 
 #Mapping aesthetic to data to = layer
 ```{r}
-install.packages("ggplot2")
+#install.packages("ggplot2")
 library(ggplot2)
 
 ggplot(diamonds, aes(x = price, y = carat)) +
@@ -43,13 +43,16 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 Can you create a line graph using the "economics_long" data set that shows change over time in "value01" for different categories of "variable"?
 
 ```{r}
-
+economics_long
+ggplot(economics_long, aes(date,value01)) + geom_point() + facet_wrap(~variable) 
+ggplot(economics_long, aes(date,value01, color = variable)) + geom_point()
 ```
 
 If you would like to recreate the Minard graphic of Napoleon's Troops the code is below and the data is in this repo.
 
 ```{r}
-
+cities <- read.csv("~/class-activity-3/cities.txt", sep="")
+troops <- read.csv("~/class-activity-3/troops.txt", sep="")
 ggplot(cities, aes(long, lat)) +
   geom_path(aes(size = survivors, colour =
 direction,
@@ -61,7 +64,8 @@ size = 4)
 last_plot() +
   scale_x_continuous("", limits = c(24, 39)) +
   scale_y_continuous("") +
-  scale_colour_manual(values = c("grey50","red")) +
-  scale_size(to = c(1, 10))
+  scale_colour_manual(values = c("grey50","red"))
+  # +
+  # scale_size(to = c(1, 10))
 ```
 
