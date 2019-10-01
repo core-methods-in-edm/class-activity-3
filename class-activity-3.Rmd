@@ -1,6 +1,6 @@
 ---
 title: "class activity 3"
-author: "Charles Lang"
+author: "Hsiao Yang"
 date: "10/2/2018"
 output: html_document
 ---
@@ -43,6 +43,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 Can you create a line graph using the "economics_long" data set that shows change over time in "value01" for different categories of "variable"?
 
 ```{r}
+ggplot(economics_long, aes(economics_long$value01, economics_long$date))+geom_line()+facet_grid(economics_long$variable~.)
 
 ```
 
@@ -61,7 +62,6 @@ size = 4)
 last_plot() +
   scale_x_continuous("", limits = c(24, 39)) +
   scale_y_continuous("") +
-  scale_colour_manual(values = c("grey50","red")) +
-  scale_size(to = c(1, 10))
+  scale_colour_manual(values = c("grey50","red"))
 ```
 
