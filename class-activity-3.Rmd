@@ -1,6 +1,6 @@
 ---
 title: "class activity 3"
-author: "Charles Lang"
+author: "Bernell Downer"
 date: "10/2/2018"
 output: html_document
 ---
@@ -43,13 +43,23 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 Can you create a line graph using the "economics_long" data set that shows change over time in "value01" for different categories of "variable"?
 
 ```{r}
-
+d <- economics_long
+d
+ggplot(data=d, aes(x=date, y=value01, group=variable, color = variable)) +
+  geom_line()+facet_grid(d$variable~.)
 ```
 
 If you would like to recreate the Minard graphic of Napoleon's Troops the code is below and the data is in this repo.
 
 ```{r}
+cities = as.data.frame("cities.txt")
+cities
+troops = as.data.frame("troops.txt")
+troops
+```
 
+
+```{r}
 ggplot(cities, aes(long, lat)) +
   geom_path(aes(size = survivors, colour =
 direction,
