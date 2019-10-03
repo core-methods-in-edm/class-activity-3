@@ -1,28 +1,28 @@
 ---
 title: "class activity 3"
-author: "Charles Lang"
-date: "10/2/2018"
+author: "Minruo Wang"
+date: "10/2/2019"
 output: html_document
 ---
 
-#Mapping aesthetic to data to = layer
+### Learn  
+#### Mapping aesthetic to data to = layer  
 ```{r}
-install.packages("ggplot2")
+# install.packages("ggplot2")
 library(ggplot2)
 
 ggplot(diamonds, aes(x = price, y = carat)) +
   geom_point()
 ```
 
-#Two layers
+#### Two layers
 ```{r}
 ggplot(mpg, aes(reorder(class, hwy), hwy)) +
-  geom_jitter() +
+  geom_jitter() + # adds a small amount of random variation to the location of each point
   geom_boxplot()
 ```
 
 ```{r}
-
 #Plot count
 ggplot(diamonds, aes(depth)) +
   geom_histogram(aes(y = ..count..), binwidth=0.2) +
@@ -37,31 +37,49 @@ ggplot(diamonds, aes(depth)) +
 ```{r}
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point()
-
+```
+  
+### Exercise
+##### 1. Can you create a line graph using the "economics_long" data set that shows change over time in "value01" for different categories of "variable"?  
+  
+```{r}
+# show in one graph
+ggplot(economics_long, aes(date, value01, color = variable)) +
+  geom_line()
+```
+  
+```{r}
+# show in facet
+ggplot(economics_long, aes(x = date, y = value01, color = variable)) +
+  geom_line() +
+  facet_wrap(~ variable)
 ```
 
-Can you create a line graph using the "economics_long" data set that shows change over time in "value01" for different categories of "variable"?
-
+##### 2. If you would like to recreate the Minard graphic of Napoleon's Troops the code is below and the data is in this repo.
 ```{r}
-
+# load and merge the data
+cities <- read.table("cities.txt", header = TRUE, sep = "")
+troops <- read.table("troops.txt", header = TRUE, sep = "")
+temps <- read.table("temps.txt", header = TRUE, sep = "")
+Napo <- merge(cities, troops, by = c("long", "lat"), all = TRUE)
+Napoleon <- merge(Napo, temps, by = "long", all = TRUE)
 ```
 
-If you would like to recreate the Minard graphic of Napoleon's Troops the code is below and the data is in this repo.
 
 ```{r}
-
-ggplot(cities, aes(long, lat)) +
-  geom_path(aes(size = survivors, colour =
-direction,
-    group = interaction(group, direction)), data =
-troops) +
-  geom_text(aes(label = city), hjust = 0, vjust = 1,
-size = 4)
-# Polish appearance
-last_plot() +
+# Napoleon's troops route
+route <- ggplot(Napoleon, aes(long, lat)) +
+  geom_path(aes(size = survivors, colour = direction,
+                group = interaction(group, direction)), 
+                data = troops) +
+  geom_text(aes(label = city), hjust = 0, vjust = 1, size = 4) +  
   scale_x_continuous("", limits = c(24, 39)) +
   scale_y_continuous("") +
   scale_colour_manual(values = c("grey50","red")) +
-  scale_size(to = c(1, 10))
+  scale_size(range = c(1, 10))
+# show the graph
+route
+# save the graph using ggsave
+ggsave(route, file = "Napoleon-route.png")
 ```
 
