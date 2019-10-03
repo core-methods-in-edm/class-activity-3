@@ -6,6 +6,10 @@ output: html_document
 ---
 
 ### Learn  
+#### Useful links  
+[ggplot2 website](https://ggplot2.tidyverse.org/reference/)  
+[R Graphic Cookbook](http://www.cookbook-r.com/Graphs/)
+
 #### Mapping aesthetic to data to = layer  
 ```{r}
 # install.packages("ggplot2")
