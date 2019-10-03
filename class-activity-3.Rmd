@@ -10,15 +10,22 @@ output: html_document
 install.packages("ggplot2")
 library(ggplot2)
 
+DF1 <- data.frame(diamonds)
+
 ggplot(diamonds, aes(x = price, y = carat)) +
   geom_point()
 ```
 
 #Two layers
 ```{r}
+
+DF2 <- data.frame(mpg)
+
 ggplot(mpg, aes(reorder(class, hwy), hwy)) +
   geom_jitter() +
   geom_boxplot()
+
+###########why reorder？
 ```
 
 ```{r}
@@ -27,6 +34,8 @@ ggplot(mpg, aes(reorder(class, hwy), hwy)) +
 ggplot(diamonds, aes(depth)) +
   geom_histogram(aes(y = ..count..), binwidth=0.2) +
   facet_wrap(~ cut) + xlim(50, 70)
+
+##########what ...? call function? 
 
 #Plot density
 ggplot(diamonds, aes(depth)) +
@@ -43,13 +52,19 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 Can you create a line graph using the "economics_long" data set that shows change over time in "value01" for different categories of "variable"?
 
 ```{r}
+economics_long
+
+DF4 <- data.frame(economics_long)
+library(ggplot2)
+ggplot(DF4, aes(x = date, y = value01)) + 
+  geom_line(aes(color = variable), size = 1) +
+  scale_color_manual(values = c("#00AFBB", "#E7B800", "#00AFBF", "#009E73", "#CC79A7"))
 
 ```
 
 If you would like to recreate the Minard graphic of Napoleon's Troops the code is below and the data is in this repo.
 
 ```{r}
-
 ggplot(cities, aes(long, lat)) +
   geom_path(aes(size = survivors, colour =
 direction,
@@ -62,6 +77,6 @@ last_plot() +
   scale_x_continuous("", limits = c(24, 39)) +
   scale_y_continuous("") +
   scale_colour_manual(values = c("grey50","red")) +
-  scale_size(to = c(1, 10))
+  scale_size(c(1, 10))
 ```
 
