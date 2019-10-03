@@ -2,8 +2,10 @@
 title: "class activity 3"
 author: "Minruo Wang"
 date: "10/2/2019"
+always_allow_html: yes
 output:
   html_document:
+    keep_md: true
     toc: true
     toc_float: true
 ---
